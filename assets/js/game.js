@@ -3,16 +3,17 @@ var playerHealth = 100;
 var playerAttack = 10;
 var playerMoney = 10;
 
-var enemyNames = ["Roborto", "Amy Android", "Robo Trumble"];
+var enemyNames = ["Roborto", "Amy Android", "Robo Trumble", "Andrew"];
 var enemyHealth = 50;
 var enemyAttack = 12;
 
 
 var fight = function (enemyName) {
-  
+    
   // repeat and execute as long as the enemy robot is alive 
   while (enemyHealth  > 0 && playerHealth > 0) {
-     // ask user if they'd liked to fight or run  
+
+        // ask user if they'd liked to fight or run  
      var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose.");
     
     // if user picks "skip" confirm and then stop the loop
@@ -51,21 +52,34 @@ var fight = function (enemyName) {
       console.log(enemyName + " attacked " + playerName + ". " + playerName + " now has " + playerHealth + " health remaining.");
       
        // check player's health
-          if (playerHealth <= 0) {
+       if (playerHealth > 0) {
 
-        window.alert(playerName + " has died!");
-          break;
-       }  else {
-        window.alert(playerName + " still has " + playerHealth + " health left.");
-       }
-      
+      // use debugger to pause script from running and check what's going on at that moment in the code
+      //debugger;
+ 
+     // pass the pickedEnemyName variable's value into the fight function, where it will assume the value of the enemyName parameter
+     fight(pickedEnemyName);
      }
+ 
+     else {
+       window.alert("You have lost your robot in battle! Game Over!");
+       break;
+     }            
+       
+   }
   };
 
 
-
+  
+  // This loop picks your enemies. This is a good place to print what round we're on before we get into the fight.
 for (var i = 0; i < enemyNames.length; i++) {
   var pickedEnemyName = enemyNames[i];
   enemyHealth = 50;
+  if(playerHealth > 0 ){
+    window.alert("Welcome to Robot Gladiators! Round " + ( i + 1 ) );
+  }
   fight(pickedEnemyName);
 }
+
+startGame();
+endGame();
