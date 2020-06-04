@@ -58,7 +58,7 @@ var fight = function (enemyName) {
 
    // function to start a new game
 
-  function startGame () {
+  var startGame= function () {
 
     // reset player stats
 
@@ -75,20 +75,32 @@ var fight = function (enemyName) {
         enemyHealth = 50;
   
         fight(pickedEnemyName);
-      } else {
+
+           // if player is still alive and we're not at the last enemy in the array
+          if (playerHealth > 0 && i < enemyNames.length - 1) {
+
+            // ask if user wants to use the store before next round
+            var storeConfirm = window.confirm("The fight is over, visit the store before the next round?");
+            
+            // if yes, take them to the store() function
+            if (storeConfirm) {
+                shop();
+            }
+          }
+      } 
+      else {
         break;
       }
-     
     }
       endGame();   
   };
 
- startGame();
+ 
 
 
  // function to end the entire game
 
- function endGame() {
+ var endGame= function () {
 
      // if player is still alive, player wins!
      
@@ -112,4 +124,56 @@ var fight = function (enemyName) {
    }
 };
 
+var shop = function() {
 
+   // ask player what they'd like to do
+
+  var shopOptionPrompt = window.prompt("Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter one: 'REFILL', 'UPGRADE', or 'LEAVE' to make a choice.");
+
+    // use switch to carry out action
+
+    switch (shopOptionPrompt) {
+      
+      case "REFILL": // new case
+      case "refill":
+        if (playerMoney >= 7) {
+          window.alert("Refilling player's health by 20 for 7 dollars.");
+    
+          playerHealth = playerHealth + 20;
+          playerMoney = playerMoney - 7;
+        }
+        else {
+          window.alert("You don't have enough money!");
+        }
+    
+        break;
+
+      case "UPGRADE": // new case
+      case "upgrade":
+        if (playerMoney >= 7) {
+          window.alert("Upgrading player's attack by 6 for 7 dollars.");
+    
+          playerAttack = playerAttack + 6;
+          playerMoney = playerMoney - 7;
+        }
+        else {
+          window.alert("You don't have enough money!");
+        }
+    
+        break;
+
+      case "LEAVE": // new case
+      case "leave":
+        window.alert("Leaving the store.");
+        break;
+
+      default:
+        window.alert("You did not pick a valid option. Try again.");
+        shop();
+        break;
+    }
+  
+};
+
+// call to the fuction stargame
+startGame();
