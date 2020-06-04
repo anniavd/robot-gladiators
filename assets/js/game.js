@@ -10,6 +10,8 @@ var enemyHealth = 50;
 var enemyAttack = 12;
 
 
+// function Fight
+
 var fight = function (enemyName) {
     
   // repeat and execute as long as the enemy robot is alive 
@@ -133,7 +135,7 @@ var shop = function() {
     // use switch to carry out action
 
     switch (shopOptionPrompt) {
-      
+
       case "REFILL": // new case
       case "refill":
         if (playerMoney >= 7) {
